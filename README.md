@@ -34,3 +34,6 @@ O FoodWasteR tem como meta transformar dados em decisões estratégicas, unindo 
 |3|	Machine Learning |Pipeline	Modelo preditivo inicial com foco em previsão de desperdícios e comportamento de clientes.|
 |4	|Visualização e Documentação	|Dashboards, métricas, relatório final e organização do repositório.|
 |(Opcional: 5–6)	|Refinamentos	|Automação de atualizações, otimização do modelo e integração com SQL/Shiny.|
+
+📄 Para o cronograma completo, veja [docs/cronograma_detalhado.md](docs/cronograma_detalhado.md)
+
