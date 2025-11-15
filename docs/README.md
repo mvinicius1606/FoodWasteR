@@ -1,0 +1,98 @@
+# 🗂️ Data Lake – FoodWasteR (Infraestrutura Inicial)
+
+Este branch documenta a primeira fase do projeto FoodWasteR, responsável pela criação do Data Lake e da base de ingestão e catalogação de dados.
+O objetivo desta etapa é estruturar o armazenamento e acesso aos dados, que serão usados posteriormente em análises, modelagem e machine learning.
+
+# 📌 Status Atual (Infraestrutura Implementada)
+✔️ AWS S3 – Data Lake (Raw Zone)
+
+- Bucket criado para armazenamento centralizado de dados
+
+- Upload dos datasets públicos obtidos no Kaggle:
+
+    - food_wastage_data
+
+    - restaurant_sales_data
+
+✔️ AWS Glue (Catálogo + Metadata)
+
+  - Database criado (db_foodwaste)
+
+  - Crawler configurado e executado com sucesso
+
+- Catálogo contendo duas tabelas estruturadas automaticamente
+
+✔️ AWS Athena
+
+- Dados disponíveis para consulta SQL
+
+- Verificação de estrutura e formato concluída
+
+# 📁 Estrutura Atual do Data Lake (RAW)
+s3://food-waste-data-lake/
+
+   └── raw/
+   
+        ├── food_wastage.csv
+        └── restaurant_sales.csv
+
+
+(Demais zonas serão adicionadas futuramente: curated / refined / analytics)
+
+🧭 Próximos Passos
+
+🟦 Agora que a ingestão e catalogação estão prontas, as próximas atividades incluem:
+
+Inventário detalhado dos dados
+
+Correlação entre vendas e desperdício
+
+Criação de zona curated ou data mart
+
+Consumo via R com RAthena
+
+Padronização de schemas e transformação inicial
+
+❗ Estes itens não serão detalhados no README porque agora estão organizados via Kanban no GitHub Projects, onde o planejamento será mantido e acompanhado de forma visual.
+
+🧰 Tecnologias Utilizadas
+
+Amazon S3
+
+AWS Glue (Database + Crawler)
+
+AWS Athena
+
+Kaggle datasets
+
+(em breve) R + RAthena
+
+📄 Documentação e Arquivos Neste Branch
+infra/datalake
+│
+├─ docs/
+│   ├─ screenshots/          (prints da configuração)
+│   ├─ publicdatasets/       (descrição dos datasets utilizados)
+│   └─ architecture.png      (em breve)
+│
+├─ sql/
+│   └─ athena_queries.sql    (consultas para teste e validação)
+│
+└─ README.md                 ← este arquivo
+
+🎯 Objetivo Desta Etapa
+
+✔ Estruturar o ambiente de ingestão e armazenamento
+✔ Deixar os dados acessíveis e consultáveis via Athena
+✔ Preparar as bases para transformação, modelagem e análise
+✔ Registrar o processo e escolhas técnicas para aprendizado e referência
+
+🚧 Aviso
+
+Este projeto está em construção contínua.
+A evolução do backlog e das próximas fases pode ser acompanhada no Kanban do repositório.
+
+🔗 Kanban do Projeto
+
+Acompanhe o progresso em:
+GitHub → Projects → FoodWasteR – Kanban
