@@ -1,5 +1,5 @@
 # FoodWasteR — Monitoramento e Prevenção de Desperdício Alimentar
-FoodWasteR é um projeto em R para coletar, processar e analisar dados de restaurantes com objetivo de identificar e prever desperdícios (ingredientes, dias, clientes) e gerar recomendações operacionais. Desenvolvido como aperfeiçoamento pessoal, pode ser adotado profissionalmente em restaurantes e serviços de alimentação.
+FoodWasteR é um projeto em R para coletar, processar e analisar dados de restaurantes com objetivo de identificar e prever desperdícios, mostrando os prejuízo e gerar recomendações operacionais. Desenvolvido como aperfeiçoamento pessoal, pode ser adotado profissionalmente em restaurantes e serviços de alimentação.
 
 # 🧩 Necessidades do Projeto
 
@@ -15,7 +15,7 @@ O projeto FoodWasteR nasce com três necessidades principais:
 
 O FoodWasteR tem como meta transformar dados em decisões estratégicas, unindo tecnologia e sustentabilidade. Entre seus principais objetivos estão:
 
-- Construir um Data Lake que centralize e padronize informações de vendas, estoque e consumo obtidas por mmeio de datasets públicos.
+- Construir um Data Lake que centralize e padronize informações de vendas, preço de custo, clientes e desperdício obtidas por meio de tabelas feitas te cunho proprio atarvés da plataforma Mockaroo.
 
 - Desenvolver dois Data Marts — um voltado para análise de vendas e outro para controle de desperdício, permitindo insights claros e segmentados.
 
@@ -27,18 +27,43 @@ O FoodWasteR tem como meta transformar dados em decisões estratégicas, unindo 
 
 # 📄 Datasets 
 
-Como datasets base dos dados, foi utilizado dois datasets públicos do Kaggle: 
-- [food_wastage_data.csv](https://www.kaggle.com/datasets/trevinhannibal/food-wastage-data-in-restaurant)
-- [9.Sales-Data-Analysis.csv](https://www.kaggle.com/datasets/rohitgrewal/restaurant-sales-data)
-- Também foi utilizado um dataset como refência para consultas: [Food Waste Dataset in U.S. 2018](https://www.kaggle.com/datasets/aritra100/food-waste-dataset-in-u-s-2018)
+Para aplicar melhor o objetivo do projeto foi utilizado a plataforma Mockaroo parra criar dados ficticios mas realistas em 3 tabelas com cerca de 1000 linhas que se correlacionam entre si, que são as: 
+- **Tabela 1:** ingredientes_restaurante, com as colunas data, id_ingredientes, ingredientes, quantidade_ingredientes, preço_ingredientes. Permitindo acompanhar os custos e a quantidade de cada insumo.
+- **Tabela 2:** menu_restaurante, com as colunas id_prato, prato, ingrediente, peso_prato. Relacionando os pratos aos ingredientes e seus pesos, possibilitando o cálculo de custo e desperdício por prato.
+- **Tabela 2:** vendas_restaurante, com as colunas data, cliente, prato, vendas_cliente, desperdicio_cliente. Registrando as vendas e estimando o desperdício e a perda financeira.
 
-# Tabela de Referência
+As tabelas são interligadas para permitir análises consistentes sobre o impacto do desperdício, o custo dos ingredientes e a rentabilidade de cada prato. Os dados simulam um mês completo de operação do restaurante e podem ser utilizados em Data Lake, Data Marts, análises SQL e visualizações em ferramentas de BI, servindo como base para estudos de gestão de desperdício alimentar e controle financeiro. Ademais, as tabelas tem propositalmente alguns dados sujos para praticar ETL.
 
-Devido a ausência de datasets especificos para o objetivo do projeto foi necessário uma tabela de referência, criada para agrupar campos semelhantes das duas tabelas bases e adicionar atributos necessários para transformar quantidade desperdiçada em custo. Para facilitar o processo de criação irei utilizar um recurso de machine learning do R, o Random Florest. Com isso, essa fase do projeto será dividia em:
-- **Etapa 1:** Preparação dos dados base, criando uma nova coluna "food_category" para relacionar as colunas "type_of_food" da tabela food_wastage_data e a coluna "product" da tabela Sales-Data-Analysis.
-- **Etapa 2:** Inserção manualmente de 100-200 linhas para usar como base de treino do Random Florest
-- **Etapa 3:** Transformar os textos (strings) em valores numericos usando a vetorização (TF-IDF) para o funcionamneto do machine learning.
-- **Etapa 4:** Implemtação, treino e validação do Random Florest.
+# ⚙️ Infraestrutura e Arquitetura
 
+O projeto foi estruturado utilizando uma abordagem de Data Lake na AWS, permitindo armazenar, catalogar e analisar grandes volumes de dados de forma escalável e organizada.
+
+## Data Lake na AWS
+
+Os dados gerados no Mockaroo foram armazenados no Amazon S3 em um bucket. Para facilitar a análise, foi utilizado o AWS Glue, que realiza o catálogo de dados, registrando as tabelas e seus metadados, tornando-as acessíveis para consultas SQL. O AWS Athena foi empregado para consultas ad-hoc diretamente sobre os arquivos no S3, permitindo a exploração dos dados sem necessidade de carregamento adicional em bancos de dados tradicionais.
+
+## ETL
+
+Foi implementado um fluxo de ETL (Extract, Transform, Load) através do AWS Glue Visual, para transformar os dados brutos em informações analíticas. O processo incluiu:
+
+- Extração: leitura dos arquivos CSV gerados no Mockaroo no S3.
+
+- Transformação: padronização de formatos, cálculo de métricas derivadas como peso total de pratos, custo do desperdício e perda financeira.
+
+- Carga: escrita dos dados transformados novamente em S3, já estruturados para consultas analíticas e criação de Data Marts.
+
+## Data Marts em R
+
+Com os dados transformados, foram criados dois Data Marts específicos utilizando R:
+
+- Data Mart de Desperdício: concentra informações sobre ingredientes, pratos e percentual/peso de desperdício por cliente e por prato, permitindo análises de eficiência e custo.
+
+- Data Mart de Vendas: centraliza dados de vendas por cliente, prato, valor e receita total, permitindo analisar o desempenho financeiro e identificar padrões de consumo.
+
+Essa arquitetura permite a integração entre armazenamento escalável, processamento de dados e análise em R, fornecendo uma base completa para estudos de desperdício alimentar, otimização de custos e inteligência de negócios no setor de restaurantes.
+
+# 📉 Análises de Dados em R 
+
+As análises foram realizadas em R a partir dos dois Data Marts criados. No Data Mart de Desperdício, foram exploradas métricas como quantidade total de desperdício, perda financeira por prato e por cliente, além de estatísticas descritivas como média, mediana e moda. Também foram identificados os clientes que geraram mais desperdício, permitindo insights sobre eficiência operacional. No Data Mart de Vendas, foram calculados indicadores como ticket médio por cliente, variação de vendas ao longo do mês e estatísticas descritivas gerais para apoiar decisões estratégicas. Para ambos os Data Marts, foram desenvolvidos dashboards interativos utilizando R Shiny e ferramentas de BI, permitindo visualização dinâmica e análise detalhada dos padrões de consumo e desperdício do restaurante.
 
 
