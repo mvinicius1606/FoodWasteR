@@ -5,7 +5,7 @@ FoodWasteR é um projeto em R para coletar, processar e analisar dados de restau
 
 O projeto FoodWasteR nasce com três necessidades principais:
 
-- Aperfeiçoamento pessoal — aplicar e consolidar conhecimentos avançados em banco de dados com R, incluindo integração de APIs públicas, criação de Data Lake e Data Marts, e implementação de pipelines analíticos e preditivos.
+- Aperfeiçoamento pessoal — aplicar e consolidar conhecimentos avançados em banco de dados com R e fundamentos em engenharia de dados na AWS, incluindo criação de Data Lake e Data Marts, ETL, e implementação de pipelines analíticos e preditivos.
 
 - Sustentabilidade — contribuir para a redução do desperdício alimentar em restaurantes, por meio de análise de dados e previsão de padrões de consumo, otimizando estoques e compras.
 
@@ -15,7 +15,7 @@ O projeto FoodWasteR nasce com três necessidades principais:
 
 O FoodWasteR tem como meta transformar dados em decisões estratégicas, unindo tecnologia e sustentabilidade. Entre seus principais objetivos estão:
 
-- Construir um Data Lake que centralize e padronize informações de vendas, estoque e consumo obtidas por meio de APIs públicas e datasets abertos.
+- Construir um Data Lake que centralize e padronize informações de vendas, estoque e consumo obtidas por mmeio de datasets públicos.
 
 - Desenvolver dois Data Marts — um voltado para análise de vendas e outro para controle de desperdício, permitindo insights claros e segmentados.
 
@@ -25,15 +25,20 @@ O FoodWasteR tem como meta transformar dados em decisões estratégicas, unindo 
 
 - Demonstrar aplicabilidade prática, servindo tanto como projeto de aperfeiçoamento pessoal quanto como modelo profissional reutilizável para o setor de alimentação.
 
-# 🗓️ Etapas do Projeto
+# 📄 Datasets 
 
-|Semana	|Foco Principal                   |	Resultados Esperados                                             |
-|-------|---------------------------------|---------------------|
-|1      |	Coleta e criação do Data Lake   |	Conexão com APIs, ingestão de dados e armazenamento bruto.       |
-|2      |	Limpeza e criação dos Data Marts| Dados tratados, normalizados e separados em vendas e desperdício.|
-|3|	Machine Learning |Pipeline	Modelo preditivo inicial com foco em previsão de desperdícios e comportamento de clientes.|
-|4	|Visualização e Documentação	|Dashboards, métricas, relatório final e organização do repositório.|
-|(Opcional: 5–6)	|Refinamentos	|Automação de atualizações, otimização do modelo e integração com SQL/Shiny.|
+Como datasets base dos dados, foi utilizado dois datasets públicos do Kaggle: 
+- [food_wastage_data.csv](https://www.kaggle.com/datasets/trevinhannibal/food-wastage-data-in-restaurant)
+- [9.Sales-Data-Analysis.csv](https://www.kaggle.com/datasets/rohitgrewal/restaurant-sales-data)
+Também foi utilizado um dataset como refência para consultas: [Food Waste Dataset in U.S. 2018](https://www.kaggle.com/datasets/aritra100/food-waste-dataset-in-u-s-2018)
 
-📄 Para o cronograma completo, veja [docs/cronograma_detalhado.md](docs/cronograma_detalhado.md)
+# Tabela de Referência
+
+Devido a ausência de datasets especificos para o objetivo do projeto foi necessário uma tabela de referência, criada para agrupar campos semelhantes das duas tabelas bases e adicionar atributos necessários para transformar quantidade desperdiçada em custo. Para facilitar o processo de criação irei utilizar um recurso de machine learning do R, o Random Florest. Com isso, essa fase do projeto será dividia em:
+- **Etapa 1:** Preparação dos dados base, criando uma nova coluna "food_category" para relacionar as colunas "type_of_food" da tabela food_wastage_data e a coluna "product" da tabela Sales-Data-Analysis.
+- **Etapa 2:** Inserção manualmente de 100-200 linhas para usar como base de treino do Random Florest
+- **Etapa 3:** Transformar os textos (strings) em valores numericos usando a vetorização (TF-IDF) para o funcionamneto do machine learning.
+- **Etapa 4:** Implemtação, treino e validação do Random Florest.
+
+
 
