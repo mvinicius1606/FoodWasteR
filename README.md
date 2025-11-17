@@ -30,7 +30,7 @@ O FoodWasteR tem como meta transformar dados em decisões estratégicas, unindo 
 Como datasets base dos dados, foi utilizado dois datasets públicos do Kaggle: 
 - [food_wastage_data.csv](https://www.kaggle.com/datasets/trevinhannibal/food-wastage-data-in-restaurant)
 - [9.Sales-Data-Analysis.csv](https://www.kaggle.com/datasets/rohitgrewal/restaurant-sales-data)
-Também foi utilizado um dataset como refência para consultas: [Food Waste Dataset in U.S. 2018](https://www.kaggle.com/datasets/aritra100/food-waste-dataset-in-u-s-2018)
+- Também foi utilizado um dataset como refência para consultas: [Food Waste Dataset in U.S. 2018](https://www.kaggle.com/datasets/aritra100/food-waste-dataset-in-u-s-2018)
 
 # Tabela de Referência
 
