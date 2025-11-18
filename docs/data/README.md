@@ -5,7 +5,7 @@ Este branch armazena os datasets brutos gerados para o projeto de análise de de
 ## 🔄 Como Reproduzir (Mockaroo)
 
 Os scripts (JSON Schemas) utilizados para configurar a lógica de geração de cada tabela estão armazenados neste repositório, no diretório:
-> **`docs/data/mockaroon/`**
+> **`docs/data/mockaroo/`**
 
 Caso queira gerar novos dados ou alterar as regras de negócio, siga este passo a passo:
 
