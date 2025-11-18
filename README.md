@@ -61,3 +61,8 @@ As análises foram realizadas em R a partir dos Data Marts criados.
 - **Vendas:** Foram calculados indicadores como ticket médio, variação de vendas ao longo do mês e estatísticas descritivas.
 
 Para ambos os cenários, foram desenvolvidos dashboards interativos utilizando **R Shiny**, permitindo visualização dinâmica dos padrões de consumo e desperdício.
+
+# Autor
+Marcos Vinicius Vieira dos Santos Assis
+
+RIO DE JANEIRO 2025
