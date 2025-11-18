@@ -1,6 +1,6 @@
-# 🗂️ Documentação dos Dados (Data Branch)
+# 🗂️ Documentação dos Dados
 
-Este branch armazena os datasets brutos gerados para o projeto de análise de desperdício alimentar e gestão financeira de restaurante. O foco deste conjunto de dados é simular um ambiente de Data Lake heterogêneo, exigindo etapas robustas de ETL para transformar dados brutos em inteligência de negócio.
+Este branch armazena os datasets brutos gerados para o projeto de análise de desperdício alimentar e gestão financeira de restaurante. O foco deste conjunto de dados é simular um ambiente de Data Lake heterogêneo, o mais próximo de um restaurante real, exigindo etapas robustas de ETL para transformar dados brutos em inteligência de negócio.
 
 ## 🔄 Como Reproduzir (Mockaroo)
 
@@ -103,3 +103,8 @@ Após o tratamento (ETL), estes dados formam a base para:
 1.  **Engenharia de Dados:** Construção de Data Lake e Data Marts organizados.
 2.  **Gestão Financeira:** Análise de Lucro Líquido (Preço de Venda - Custo dos Ingredientes - Custo do Desperdício).
 3.  **Sustentabilidade:** Dashboards de BI monitorando o volume de comida jogada fora e quais ingredientes são os maiores vilões do desperdício.
+
+# Autor
+Marcos Vinicius Vieira dos Santos Assis
+
+RIO DE JANEIRO - 2025
