@@ -2,6 +2,20 @@
 
 Este branch armazena os datasets brutos gerados para o projeto de análise de desperdício alimentar e gestão financeira de restaurante. O foco deste conjunto de dados é simular um ambiente de Data Lake heterogêneo, exigindo etapas robustas de ETL para transformar dados brutos em inteligência de negócio.
 
+## 🔄 Como Reproduzir (Mockaroo)
+
+Os scripts (JSON Schemas) utilizados para configurar a lógica de geração de cada tabela estão armazenados neste repositório, no diretório:
+> **`docs/data/mockaroon/`**
+
+Caso queira gerar novos dados ou alterar as regras de negócio, siga este passo a passo:
+
+1.  Acesse o arquivo desejado na pasta `docs/data/mockaroo` e copie todo o conteúdo JSON.
+2.  Vá para o site [Mockaroo](https://mockaroo.com/).
+3.  Clique no botão **"Import Fields"** (localizado acima da lista de campos).
+4.  Cole o código JSON e clique em **Import**.
+5.  Configure o número de linhas (**# Rows**) e o formato (**Format**) conforme a tabela de especificações abaixo (Seção "Estrutura das Tabelas").
+6.  Clique em **Download Data**.
+
 ## 🤖 Processo de Criação e Metodologia
 
 Para garantir a aplicação prática em cenários complexos de Engenharia de Dados, os dados foram gerados sinteticamente utilizando a plataforma **Mockaroo**, com o auxílio do **Google Gemini** para o desenvolvimento de scripts lógicos avançados (Ruby/JSON schemas).
