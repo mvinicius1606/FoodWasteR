@@ -1,0 +1,42 @@
+[
+  {
+    "name": "id_venda",
+    "type": "Row Number",
+    "formula": ""
+  },
+  {
+    "name": "data",
+    "type": "Formula",
+    "value": "d = date('2024-11-01', '2024-12-01'); r = random(0,100); if r < 2 then nil elsif r < 15 then d.strftime('%d/%m/%Y') elsif r < 30 then d.strftime('%d-%m-%Y') else d.strftime('%Y-%m-%d') end"
+  },
+  {
+    "name": "cliente",
+    "type": "Formula",
+    "value": "nomes = ['Ana Silva', 'Carlos Eduardo', 'Beatriz Souza', 'Fernanda Lima', 'João Pedro', 'Mariana Alves', 'Lucas Pereira', 'Juliana Costa', 'Rafael Mendes', 'Gabriela Rocha', 'Pedro Henrique', 'Larissa Martins', 'Thiago Oliveira', 'Camila Santos', 'Rodrigo Ferreira', 'Amanda Gomes', 'Bruno Cardoso', 'Isabela Ribeiro', 'Gustavo Almeida', 'Renata Barbosa']; nomes.sample"
+  },
+  {
+    "name": "id_prato",
+    "type": "Formula",
+    "value": "ids = [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112]; idx = (field('id_venda') * 7) % ids.length; ids[idx]"
+  },
+  {
+    "name": "prato",
+    "type": "Formula",
+    "value": "pratos = ['Filé à Parmegiana', 'Feijoada Completa', 'Salada Caesar', 'Estrogonofe de Frango', 'Picanha na Chapa', 'Macarrão ao Sugo', 'Risoto de Camarão', 'Salmão com Legumes', 'Carbonara à Brasileira', 'Bife Acebolado', 'Escondidinho de Carne', 'Misto Quente de Prato']; idx = (field('id_venda') * 7) % pratos.length; pratos[idx]"
+  },
+  {
+    "name": "vendas_cliente",
+    "type": "Formula",
+    "value": "precos = [72.00, 59.90, 32.00, 38.50, 129.90, 28.00, 85.00, 92.00, 45.00, 68.00, 35.00, 22.00]; idx = (field('id_venda') * 7) % precos.length; val = precos[idx]; r = random(0,100); if r < 1 then nil elsif r < 5 then 0.00 else val end"
+  },
+  {
+    "name": "desperdicio_cliente",
+    "type": "Formula",
+    "value": "pesos = [700, 800, 300, 500, 610, 450, 450, 500, 500, 600, 550, 250]; idx = (field('id_venda') * 7) % pesos.length; peso_total = pesos[idx]; r = random(0,100); if r < 40 then waste = 0 elsif r < 90 then waste = random(10, (peso_total * 0.30).to_i) else waste = random((peso_total * 0.30).to_i, (peso_total * 0.80).to_i) end; r2 = random(0,100); if r2 < 3 then nil elsif r2 < 10 then \"#{waste}g\" else waste end"
+  },
+  {
+    "name": "ingrediente_desperdicado",
+    "type": "Formula",
+    "value": "ingredientes_map = [\n  ['Filé Mignon', 'Queijo Mussarela', 'Molho de Tomate', 'Arroz Branco'],\n  ['Feijão Preto', 'Bacon', 'Arroz Branco'],\n  ['Alface Americana', 'Peito de Frango', 'Queijo Mussarela'],\n  ['Peito de Frango', 'Arroz Branco', 'Batata Inglesa'],\n  ['Picanha', 'Sal'],\n  ['Macarrão Espaguete', 'Molho de Tomate'],\n  ['Camarão', 'Arroz Branco', 'Manteiga'],\n  ['Salmão', 'Cenoura', 'Batata Inglesa'],\n  ['Macarrão Espaguete', 'Bacon', 'Ovos', 'Queijo Mussarela'],\n  ['Filé Mignon', 'Cebola', 'Arroz Branco'],\n  ['Carne Moída (Patinho)', 'Batata Inglesa', 'Leite Integral'],\n  ['Presunto', 'Queijo Mussarela']\n];\n\n# Pega o indice do prato igual as colunas anteriores\nidx = (field('id_venda') * 7) % ingredients_map.length;\n\n# Verifica se houve desperdicio na coluna anterior (converte texto '50g' para numero 50)\nwaste_val = field('desperdicio_cliente').to_s.to_i;\n\nif waste_val == 0\n  nil # Se nao desperdicou nada, nao tem ingrediente\nelse\n  ingredients_map[idx].sample # Sorteia um ingrediente DO PRATO correto\nend"
+  }
+]

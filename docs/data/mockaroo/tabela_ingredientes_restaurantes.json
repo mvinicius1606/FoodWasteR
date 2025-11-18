@@ -1,0 +1,32 @@
+[
+  {
+    "name": "id_estoque",
+    "type": "Row Number",
+    "formula": ""
+  },
+  {
+    "name": "data_estoque",
+    "type": "Formula",
+    "value": "d = date('2024-11-01', '2024-12-01'); \n# Sujeira: Mistura formatos BR (DD/MM), ISO (YYYY-MM) e Nulos\nr = random(0,100); \nif r < 2 then nil \nelsif r < 15 then d.strftime('%d/%m/%Y') \nelsif r < 30 then d.strftime('%d-%m-%Y') \nelse d.strftime('%Y-%m-%d') end"
+  },
+  {
+    "name": "id_ingredientes",
+    "type": "Formula",
+    "value": "ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]; \n# Garante que percorre todos os ingredientes ciclicamente ao longo das 70 linhas\nidx = (field('id_estoque') - 1) % ids.length; \nids[idx]"
+  },
+  {
+    "name": "ingredientes",
+    "type": "Formula",
+    "value": "names = ['Arroz Branco', 'Feijão Preto', 'Macarrão Espaguete', 'Farinha de Trigo', 'Filé Mignon', 'Picanha', 'Salmão', 'Camarão', 'Peito de Frango', 'Carne Moída (Patinho)', 'Bacon', 'Presunto', 'Queijo Mussarela', 'Manteiga', 'Leite Integral', 'Ovos', 'Batata Inglesa', 'Cenoura', 'Cebola', 'Alface Americana', 'Molho de Tomate', 'Sal']; \nidx = (field('id_estoque') - 1) % names.length; \nnames[idx]"
+  },
+  {
+    "name": "quantidade_ingredientes",
+    "type": "Formula",
+    "value": "cats = ['grao', 'grao', 'massa', 'po', 'carne_nobre', 'carne_nobre', 'peixe', 'peixe', 'carne_comum', 'carne_comum', 'frio', 'frio', 'frio', 'frio', 'liquido', 'unitario', 'legume', 'legume', 'legume', 'verdura', 'liquido', 'tempero']; \nidx = (field('id_estoque') - 1) % cats.length; \ncat = cats[idx];\n\n# DEFINIÇÃO DE PESO EM KG (Atacado)\nif ['grao', 'massa', 'po'].include?(cat) then qty = random(30, 60) # Sacas grandes (30kg a 60kg)\nelsif ['carne_nobre', 'peixe'].include?(cat) then qty = random(5, 15) # Peças nobres (5kg a 15kg)\nelsif ['carne_comum', 'legume'].include?(cat) then qty = random(15, 40) # Caixotes (15kg a 40kg)\nelsif ['verdura', 'tempero'].include?(cat) then qty = random(2, 8) # Volumes menores (2kg a 8kg)\nelse qty = random(10, 25) end; # Geral\n\n# Sujeira: Mistura Numero Inteiro com Texto 'kg'\nr = random(0,100); \nif r < 3 then nil \nelsif r < 10 then \"#{qty}kg\" \nelsif r < 20 then \"#{qty} kg\" \nelse qty end"
+  },
+  {
+    "name": "preço_ingredientes",
+    "type": "Formula",
+    "value": "cats = ['grao', 'grao', 'massa', 'po', 'carne_nobre', 'carne_nobre', 'peixe', 'peixe', 'carne_comum', 'carne_comum', 'frio', 'frio', 'frio', 'frio', 'liquido', 'unitario', 'legume', 'legume', 'legume', 'verdura', 'liquido', 'tempero']; \nidx = (field('id_estoque') - 1) % cats.length; \ncat = cats[idx];\n\n# 1. Recalcula a quantidade (mesma logica da coluna anterior para consistencia de valor)\nif ['grao', 'massa', 'po'].include?(cat) then qty_estimada = 45\nelsif ['carne_nobre', 'peixe'].include?(cat) then qty_estimada = 10\nelsif ['carne_comum', 'legume'].include?(cat) then qty_estimada = 25\nelsif ['verdura', 'tempero'].include?(cat) then qty_estimada = 5\nelse qty_estimada = 15 end;\n\n# 2. Preço por KG estimado\nif cat == 'carne_nobre' then p_kg = random(60, 110)\nelsif cat == 'peixe' then p_kg = random(50, 90)\nelsif cat == 'frio' then p_kg = random(30, 60)\nelsif cat == 'carne_comum' then p_kg = random(25, 40)\nelsif cat == 'legume' then p_kg = random(3, 8)\nelsif cat == 'grao' then p_kg = random(4, 10)\nelse p_kg = random(10, 25) end;\n\n# 3. Preço Total da Nota = Qtd * Preço/kg (+ variação aleatoria)\np_total = (p_kg * qty_estimada * (random(90, 110)/100.0)).round(2);\n\n# Sujeira\nr = random(0,100); \nif r < 3 then nil elsif r < 10 then \"R$ #{p_total}\" else p_total end"
+  }
+]
